@@ -19,11 +19,11 @@ namespace SchroniskoV2.Business_Logic
     /// </summary>
     internal static class CSVReaderWriter
     {
-        internal static void WriteAllAnimals(bool isExiting)
+        internal static void SaveShelterStatus(bool isExiting)
         {
             var animals = ShelterManager.ListAnimals();
 
-            using (var csv = new StreamWriter("C:\\Users\\Kacper\\Documents\\Moje\\Programowanie\\C#\\Schronisko-20190217T114324Z-001\\Schronisko\\Wersja 2\\SchroniskoV2\\eksport.csv"))
+            using (var csv = new StreamWriter(@"C:\Users\Kacper\Documents\Moje\Programowanie\C#\Schronisko\Schronisko_1.0\eksport.csv"))
             {
                 var firstLine = string.Format("ID;Imie;Typ;Data rejestracji");
                 csv.WriteLine(firstLine);
@@ -43,29 +43,26 @@ namespace SchroniskoV2.Business_Logic
 
             // otwieranie pliku
             if (!isExiting)
-                Process.Start("C:\\Users\\Kacper\\Documents\\Moje\\Programowanie\\C#\\Schronisko-20190217T114324Z-001\\Schronisko\\Wersja 2\\SchroniskoV2\\eksport.csv");
+                Process.Start(@"C:\Users\Kacper\Documents\Moje\Programowanie\C#\Schronisko\Schronisko_1.0\eksport.csv");
         }
 
-        internal static void ReadAnimals()
+        internal static void LoadShelterStatus()
         {
-            using (var reader = new StreamReader("C:\\Users\\Kacper\\Documents\\Moje\\Programowanie\\C#\\Schronisko-20190217T114324Z-001\\Schronisko\\Wersja 2\\SchroniskoV2\\eksport.csv"))
+            using (var reader = new StreamReader(@"C:\Users\Kacper\Documents\Moje\Programowanie\C#\Schronisko\Schronisko_1.0\eksport.csv"))
             {
-                List<int> AnimalIdList = new List<int>();
-                List<string> NameList = new List<string>();
-                List<string> TypeList = new List<string>();
-                List<DateTime> DateOfAdmissionList = new List<DateTime>();
+                var line = reader.ReadLine();
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
+                    line = reader.ReadLine();
                     var values = line.Split(';');
 
+                    int Id = Int32.Parse(values[0]);
+                    string name = values[1];
+                    string type = values[2];
+                    DateTime DateOfAdmission = DateTime.ParseExact(values[3], "dd.MM.yyyy HH:mm:ss",
+                                                                   System.Globalization.CultureInfo.InvariantCulture);
 
-
-                    //AnimalIdList.Add(Int32.Parse(values[0]));
-                    //NameList.Add(values[1]);
-                    //TypeList.Add(values[2]);
-                    //DateOfAdmissionList.Add(DateTime.ParseExact(values[3], "dd.MM.yyyy HH:mm:ss",
-                    //                   System.Globalization.CultureInfo.InvariantCulture));
+                    ShelterManager.Add(Id, name, type, DateOfAdmission);
                 }
             }
         }

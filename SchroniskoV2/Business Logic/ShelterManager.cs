@@ -8,7 +8,11 @@ namespace SchroniskoV2.Business_Logic
 {
     public static class ShelterManager
     {
+        // Shelter properties
         public static readonly int LimitZwierzat = 5;
+
+
+        #region Adding and removing animals
         public static void Add(string name, string type)
         {
             var animalRepository = AnimalRepository.GetInstance();
@@ -21,6 +25,26 @@ namespace SchroniskoV2.Business_Logic
                 throw new AnimalsAmountExceededException("Dodano za dużo zwierząt");
             }
         }
+        public static void Add(int Id, string name, string type, DateTime dateTime)
+        {
+            var animalRepository = AnimalRepository.GetInstance();
+            if (animalRepository.Count() < LimitZwierzat)
+            {
+                animalRepository.Add(new Animal(Id, name, type, dateTime));
+            }
+            else
+            {
+                throw new AnimalsAmountExceededException("Dodano za dużo zwierząt");
+            }
+        }
+        public static void RemoveAnimal(Animal animal)
+        {
+            var animalRepository = AnimalRepository.GetInstance();
+            animalRepository.RemoveAnimal(animal);
+        }
+        #endregion
+
+        #region Listing and counting animals
         public static int Count()
         {
             var animalRepository = AnimalRepository.GetInstance();
@@ -38,16 +62,20 @@ namespace SchroniskoV2.Business_Logic
             var animalRepository = AnimalRepository.GetInstance();
             return animalRepository.ListAnimalClass();
         }
+        #endregion
 
-        public static void RemoveAnimal(Animal animal)
+
+        #region Saving and reading animals
+        public static void SaveShelterStatus(bool isExiting)
         {
-            var animalRepository = AnimalRepository.GetInstance();
-            animalRepository.RemoveAnimal(animal);
+            CSVReaderWriter.SaveShelterStatus(isExiting);
         }
 
-        public static void SaveAllAnimals(bool isExiting)
+        public static void LoadShelterStatus()
         {
-            CSVReaderWriter.WriteAllAnimals(isExiting);
+            CSVReaderWriter.LoadShelterStatus();
         }
+        #endregion
+
     }
 }

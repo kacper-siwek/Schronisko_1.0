@@ -33,6 +33,7 @@ namespace SchroniskoV2
         public MainWindow()
         {
             InitializeComponent();
+            ShelterManager.LoadShelterStatus();
         }
 
         private void AddAnimal_Click(object sender, RoutedEventArgs e)
@@ -58,13 +59,12 @@ namespace SchroniskoV2
 
         private void Export_Click(object sender, RoutedEventArgs e)
         {
-            ShelterManager.SaveAllAnimals(false);
+            ShelterManager.SaveShelterStatus(false);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            ShelterManager.SaveAllAnimals(true);
-
+            ShelterManager.SaveShelterStatus(true);
             System.Windows.Application.Current.Shutdown();
         }
     }
