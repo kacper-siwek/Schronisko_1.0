@@ -20,11 +20,10 @@ namespace SchroniskoV2
     /// Interaction logic for MainWindow.xaml
     /// 
     /// todo:
-    /// zapisywanie i wczytywanie stanu, przycisk 'Wyjscie'
     /// wyświetlanie obecnego stanu schroniska na górze, bez klikania w "Status"
-    /// eleganckie usuwanie zwierzaków - używając ObservableCollection i INotifyCollectionChanged. Do tego usuwanie wielu na raz.
-    /// regex na wbijanie zwierzakóws
+    /// eleganckie usuwanie zwierząt - używając ObservableCollection i INotifyCollectionChanged. Do tego usuwanie wielu na raz.
     /// baza
+    /// regex na wprowadzanie danych
     /// elegancki zapis i odczyt, niehardkodowany jak jest teraz
     /// wyświetlanie daty i godziny
     /// </summary>
