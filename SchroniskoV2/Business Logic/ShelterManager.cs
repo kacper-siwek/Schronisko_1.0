@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace SchroniskoV2.Business_Logic
             return animalRepository.ListAnimalsString();
         }
 
-        public static List<Animal> ListAnimals()
+        public static ObservableCollection<Animal> ListAnimals()
         {
             var animalRepository = AnimalRepository.GetInstance();
             return animalRepository.ListAnimalClass();

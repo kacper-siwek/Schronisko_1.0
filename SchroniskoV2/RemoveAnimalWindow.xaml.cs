@@ -24,7 +24,7 @@ namespace SchroniskoV2
         {
             InitializeComponent();
 
-            List<Animal> animalClasses = ShelterManager.ListAnimals();
+            var animalClasses = ShelterManager.ListAnimals();
             AnimalsList.ItemsSource = animalClasses;
         }
 
@@ -40,9 +40,7 @@ namespace SchroniskoV2
             var content = AnimalsList.SelectedItem as Animal;
             
             ShelterManager.RemoveAnimal(content);
-
-            var animalClasses = ShelterManager.ListAnimals();
-            AnimalsList.ItemsSource = animalClasses;
+            
         }
     }
 }

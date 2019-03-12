@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,10 @@ namespace SchroniskoV2.Business_Logic
     {
         private static AnimalRepository instance = null;
 
-        public List<Animal> animals;
+        public ObservableCollection<Animal> animals;
         private AnimalRepository()
         {
-            animals = new List<Animal>();
+            animals = new ObservableCollection<Animal>();
         }
 
         public static AnimalRepository GetInstance()
@@ -45,7 +46,7 @@ namespace SchroniskoV2.Business_Logic
             return stringBuilder.ToString();
         }
 
-        public List<Animal> ListAnimalClass()
+        public ObservableCollection<Animal> ListAnimalClass()
         {
             return animals;
         }
